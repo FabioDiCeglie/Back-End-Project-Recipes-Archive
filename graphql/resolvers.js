@@ -28,18 +28,18 @@ module.exports = {
     },
 
     async deleteRecipe(_, { ID }) {
-      const wasDeleted = await (
-        await Recipe.deleteOne({ _id: ID })
-      ).deletedCount;
+      const wasDeleted = (await Recipe.deleteOne({ _id: ID })).deletedCount;
       //1 if something was deleted, 0 if nothing was deleted
       // true or false
       return wasDeleted;
     },
 
     async editRecipe(_, { ID, recipeInput: { name, description } }) {
-      const wasEdited = await Recipe.updateOne(
-        { _id: ID },
-        { name: name, description: description }
+      const wasEdited = (
+        await Recipe.updateOne(
+          { _id: ID },
+          { name: name, description: description }
+        )
       ).modifiedCount;
       return wasEdited; //1 if something was edited, 0 if nothing was edited (true or false)
     },
