@@ -1,4 +1,4 @@
-const User = require("../models/User");
+const User = require("../../models/User");
 const { ApolloError } = require("apollo-server-errors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -46,7 +46,7 @@ module.exports = {
       const user = await User.findOne({ email });
 
       // check if the entered password equals the encrypted password
-      if (user && (await bcrypt.compare(password, user.model))) {
+      if (user && (await bcrypt.compare(password, user.password))) {
         // create a NEW token
         const token = jwt.sign(
           { user_id: newUser._id, email },
