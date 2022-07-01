@@ -26,6 +26,17 @@ module.exports = gql`
     token: String
   }
 
+  input RegisterInput {
+    username: String
+    email: String
+    password: String
+  }
+
+  input LoginInput {
+    email: String
+    password: String
+  }
+
   type Query {
     recipe(ID: ID!): Recipe!
     getRecipes(amount: Int): [Recipe]
@@ -35,5 +46,6 @@ module.exports = gql`
     createRecipe(recipeInput: RecipeInput): Recipe!
     deleteRecipe(ID: ID!): Boolean
     editRecipe(ID: ID!, recipeInput: RecipeInput): Boolean
+    registerUser(registerInput: RegisterInput): User
   }
 `;
