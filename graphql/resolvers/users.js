@@ -48,13 +48,9 @@ module.exports = {
       // check if the entered password equals the encrypted password
       if (user && (await bcrypt.compare(password, user.password))) {
         // create a NEW token
-        const token = jwt.sign(
-          { user_id: newUser._id, email },
-          "UNSAFE_STRING",
-          {
-            expiresIn: "3h",
-          }
-        );
+        const token = jwt.sign({ user_id: user._id, email }, "UNSAFE_STRING", {
+          expiresIn: "3h",
+        });
 
         // attach token to user model that we found
         user.token = token;
