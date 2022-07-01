@@ -19,6 +19,13 @@ module.exports = gql`
     ingredients: String
   }
 
+  type User {
+    username: String
+    email: String
+    password: String
+    token: String
+  }
+
   type Query {
     recipe(ID: ID!): Recipe!
     getRecipes(amount: Int): [Recipe]
