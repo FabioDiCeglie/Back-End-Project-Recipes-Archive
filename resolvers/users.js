@@ -41,5 +41,32 @@ module.exports = {
         ...res._doc,
       };
     },
+    async loginUser(_, { loginInput: { email, password } }) {
+      // see if user exist with email
+      const user = await User.findOne({ email });
+
+      // check if the entered password equals the encrypted password
+      if (user && (await bcrypt.compare(password, user.model))) {
+        // create a NEW token
+        const token = jwt.sign(
+          { user_id: newUser._id, email },
+          "UNSAFE_STRING",
+          {
+            expiresIn: "3h",
+          }
+        );
+
+        // attach token to user model that we found
+        user.token = token;
+
+        return {
+          id: user.id,
+          ...user._doc,
+        };
+      } else {
+        // if user doesn't exist return error
+        throw new ApolloError("Incorrect password!");
+      }
+    },
   },
 };
