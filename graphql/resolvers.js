@@ -10,7 +10,10 @@ module.exports = {
     },
   },
   Mutation: {
-    async createRecipe(_, { recipeInput: { name, description, imageUrl } }) {
+    async createRecipe(
+      _,
+      { recipeInput: { name, description, imageUrl, ingredients } }
+    ) {
       const createdRecipe = new Recipe({
         name: name,
         description: description,
@@ -18,6 +21,7 @@ module.exports = {
         thumbsUp: 0,
         thumbsDown: 0,
         imageUrl: imageUrl,
+        ingredients: ingredients,
       });
 
       const res = await createdRecipe.save(); //MongoDB saving

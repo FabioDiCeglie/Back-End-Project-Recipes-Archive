@@ -9,12 +9,14 @@ module.exports = gql`
     thumbsUp: Int
     thumbsDown: Int
     imageUrl: String
+    ingredients: String
   }
 
   input RecipeInput {
     name: String
     description: String
     imageUrl: String
+    ingredients: String
   }
 
   type Query {

@@ -7,6 +7,7 @@ const recipeSchema = new Schema({
   thumbsUp: Number,
   thumbsDown: Number,
   imageUrl: String,
+  ingredients: String,
 });
 
 module.exports = model("Recipe", recipeSchema);
